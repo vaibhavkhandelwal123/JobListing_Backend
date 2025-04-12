@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class PostController {
 
@@ -26,16 +27,20 @@ public class PostController {
         response.sendRedirect("/swagger-ui.html");
     }
 
+    @CrossOrigin(origins = "http://localhost:5173/")
     @GetMapping("/posts")
     private List<Post> getAllPosts(){
         return repo.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:5173/")
     @PostMapping("/post")
     public Post addPost(@RequestBody Post post){
+        System.out.println(post);
         return repo.save(post);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173/")
     @GetMapping("/posts/{text}")
     public List<Post> search(@PathVariable String text){
         return srepo.findByText(text);

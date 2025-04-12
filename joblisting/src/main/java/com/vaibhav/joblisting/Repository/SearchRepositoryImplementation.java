@@ -31,7 +31,7 @@ public class SearchRepositoryImplementation implements SearchRepository{
         MongoCollection<Document> collection = database.getCollection("jobs");
         AggregateIterable<Document> result = collection.aggregate(Arrays.asList(new Document("$search",
                         new Document("text",
-                                new Document("query", "developer")
+                                new Document("query",text)
                                         .append("path", Arrays.asList("profile", "desc", "techs")))),
                 new Document("$sort",
                         new Document("exp", 1L)),
